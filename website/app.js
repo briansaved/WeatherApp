@@ -12,6 +12,10 @@ const retrieveData = async (url = "") => {
   const request = await fetch(url);
   try {
     let cityData = await request.json();
+    //Validate that the City Entered is Valid
+    cityData.cod == "404" //Valid cod is 200
+      ? alert("Please Enter a valid Location")
+      : console.log(cityData);
     return cityData;
   } catch (error) {
     console.log("opps: There is an error ", error);
@@ -28,14 +32,14 @@ function sendRequest(e) {
   newCity == "" || mood == ""
     ? alert(`Please fill in all fields!`)
     : retrieveData(baseUrl + newCity + apiKey)
-        .then(function (data) {
-          postData("/data", {
+        .then(async function (data) {
+          await postData("/data", {
             Temprature: data.main.temp,
             Date: newDate,
             mood: mood,
           });
         })
-        .then(function () {
+        .then(function (res) {
           updateUi();
         });
 }
@@ -51,7 +55,7 @@ let postData = async (url = "", data = {}) => {
   });
 
   try {
-    const newData = await response.json();
+    let newData = await response.json();
 
     return newData;
   } catch (error) {
@@ -59,10 +63,10 @@ let postData = async (url = "", data = {}) => {
   }
 };
 
-const updateUi = async () => {
+let updateUi = async () => {
   const request = await fetch("/all");
   try {
-    const allData = await request.json();
+    let allData = await request.json();
     console.log(allData);
 
     document.getElementById("date").innerHTML = allData.date;
