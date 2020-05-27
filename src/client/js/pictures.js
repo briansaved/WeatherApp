@@ -8,26 +8,19 @@ let getImage = async (city, country) => {
   console.log("country argument is ", country);
   console.log(baseUrl + api_Key + city + options);
   let image = await fetch(baseUrl + api_Key + city + options);
-  let imageFallback;
+  let images = await fetch(baseUrl + api_Key + country + options);
+  // let imageFallback;
+
+  //The extra feature was to return the country Image if the City Image returns nothing.
 
   try {
-    let picData = await image.json();
-    if (picData.hits.length == 0) {
-      imageFallback = await fetch(baseUrl + api_Key + country + options);
-
-      try {
-        picData = await imageFallback.json();
-        return picData.hits[0].webformatURL;
-      } catch (err) {
-        console.log("OOPSIE : ", err);
-      }
-      return picData.hits[0].webformatURL;
-    } else {
-      imageFallback = "";
-      console.log("the raw pic data is ", picData);
-      console.log(picData.hits[0].webformatURL);
-      return picData.hits[0].webformatURL;
-    }
+    let picData = await image.json(); //request both City Image and
+    let picDatas = await images.json(); //Country iMAGE
+    console.log("City Image Url is ", picData.hits[0].webformatURL); //Log the urls
+    console.log("Country Image Url is ", picDatas.hits[0].webformatURL);
+    return picData.hits.length == 0 //if City Image does not Exist
+      ? picDatas.hits[0].webformatURL //Use Country image
+      : picData.hits[0].webformatURL; //But Use City Image if it Exists
   } catch (err) {
     console.log("OOPSIE :", err);
   }
