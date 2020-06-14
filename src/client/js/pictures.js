@@ -4,11 +4,8 @@ let getImage = async (city, country) => {
   const options = "&image_type=photo&category=places&orientation=horizontal";
   const countryOpt = country.split(" ").join("+"); //remove space in query If there is
   const cityOpt = city.split(" ").join("+"); //remove space replace with + for correct query
-  /*https://pixabay.com/api/?key=16717105-735b294afc55d03fb38d00a9d
-  &q=yellow+flowers&image_type=photo
-  */
-  // console.log(baseUrl + api_Key + cityOpt + options);
-  // console.log(baseUrl + api_Key + countryOpt + options);
+  //if there is a space at all, else does nothing.
+
   let image = await fetch(baseUrl + api_Key + cityOpt + options);
   let images = await fetch(baseUrl + api_Key + countryOpt + options);
 
