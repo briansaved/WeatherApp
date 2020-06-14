@@ -6,7 +6,6 @@ const retrieveData = async (url = "") => {
   const request = await fetch(url);
   try {
     let cityData = await request.json();
-    console.log(cityData);
     //Validate that the City Entered is Valid
     cityData.geonames.length == 0 //Validate City Name
       ? (alert("Please Enter a valid Location"), listener())
