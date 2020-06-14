@@ -56,7 +56,6 @@ function sendRequest() {
           return finalWeather;
         })
         .then(async function (weather) {
-          console.log("Forecast before UI ", weather);
           await postData("/more", {
             weather: weather.data, //only posting the array with forecast
           });
@@ -89,24 +88,29 @@ let updateUi = async () => {
   const request = await fetch("/all");
   try {
     let allData = await request.json();
-    console.log("all data from server is ", allData);
     let cityImage = await Client.getImage(allData.city, allData.country);
-
     let img = document.createElement("img");
     img.setAttribute("src", cityImage);
     img.setAttribute("width", "100%");
     let cityPhoto = document.getElementById("cityImage");
     cityPhoto.firstChild //Fixed bug where pictures kept getting added
       ? cityPhoto.removeChild(cityPhoto.firstChild) //Removed last picture if there is one
-      : console.log("No Picture");
+      : console.log("No Picture!");
     cityPhoto.appendChild(img); //Keeps UI clean with one pic only
 
     document.getElementById("city").innerHTML =
       "Enjoy Your Visit to   " + allData.city;
     document.getElementById("days").innerHTML =
       "There are Less Than " + daysValue + " Days Till you leave";
+
+    //If Departure date is more than 16 days away, 16th day temp is displayed
     document.getElementById("temp").innerHTML =
-      allData.weather[daysValue].temp + " Degrees Celcius on Arrival";
+      allData.weather[`${daysValue > 15 ? 15 : daysValue}`].temp +
+      ` ${
+        daysValue > 15
+          ? "Degrees Celcius in 16 Days Time" //Conditional Message Rendering if more than 16
+          : "Degrees Celcius on Arrival" //If less than 16 days ahead
+      }`;
     listener(); //reinstate listener once data is displayed
   } catch (error) {
     console.log(`UI Failure Render Error APP.JS: ${error}`);
