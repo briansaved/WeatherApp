@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin"); //default with webpack 4
-const WorkboxPlugin = require("workbox-webpack-plugin");
+// const WorkboxPlugin = require("workbox-webpack-plugin"); //service worker
 
 module.exports = {
   mode: "production",
@@ -64,6 +64,6 @@ module.exports = {
       //utputs the CSS files in separate folders
       filename: "[name]-[contentHash].css", //cache busring
     }),
-    new WorkboxPlugin.GenerateSW(), //Service worker
+    // new WorkboxPlugin.GenerateSW(), //Service worker
   ],
 };

@@ -4,6 +4,8 @@ import { days } from "./js/days";
 import { getWeather } from "./js/weather";
 import { getImage } from "./js/pictures";
 
+require("regenerator-runtime/path").path; //Solve regenerator runtime error
+
 import html from "./views/index.html";
 import "./styles/styles.scss";
 

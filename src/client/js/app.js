@@ -16,7 +16,7 @@ const retrieveData = async (url = "") => {
       ${cityData.geonames[0].name}`);
     return cityData;
   } catch (error) {
-    console.log("opps: There is an error ", error);
+    console.log("Retrieve Data Error App.js: ", error);
   }
 };
 
@@ -79,7 +79,7 @@ let postData = async (url = "", data = {}) => {
 
     return newData;
   } catch (error) {
-    console.log(`OOPSIE: ${error}`);
+    console.log(`Post Data Error App.js: ${error}`);
   }
 };
 
@@ -107,7 +107,7 @@ let updateUi = async () => {
       allData.weather[daysValue].temp + " Degrees Celcius on Arrival";
     listener(); //reinstate listener once data is displayed
   } catch (error) {
-    console.log(`OOPSIE: ${error}`);
+    console.log(`UI Failure Render Error APP.JS: ${error}`);
   }
 };
 document.getElementById("print").addEventListener("click", (e) => {
