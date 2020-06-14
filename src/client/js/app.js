@@ -91,13 +91,15 @@ let updateUi = async () => {
     let allData = await request.json();
     console.log("all data from server is ", allData);
     let cityImage = await Client.getImage(allData.city, allData.country);
-    console.log("The image url in UI is ", cityImage);
 
     let img = document.createElement("img");
     img.setAttribute("src", cityImage);
     img.setAttribute("width", "100%");
     let cityPhoto = document.getElementById("cityImage");
-    cityPhoto.appendChild(img);
+    cityPhoto.firstChild //Fixed bug where pictures kept getting added
+      ? cityPhoto.removeChild(cityPhoto.firstChild) //Removed last picture if there is one
+      : console.log("No Picture");
+    cityPhoto.appendChild(img); //Keeps UI clean with one pic only
 
     document.getElementById("city").innerHTML =
       "Enjoy Your Visit to   " + allData.city;
