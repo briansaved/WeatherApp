@@ -9,8 +9,11 @@ let weekDay = [
 ];
 
 let forecast = (data) => {
-  console.log("forecast funct is called :", data);
+  // console.log("forecast funct is called :", data);
   let displayContent = "";
+  //displays through length of whole object iteration regardless of varying length
+  //currently weatherbit api gives 16 days forcast but if it changes, code will work
+  //thus data.weather.length-1
   for (let i = 0; i < data.weather.length - 1; i++) {
     let d = new Date();
     d.setDate(d.getDate() + i);
