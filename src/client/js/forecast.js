@@ -38,7 +38,7 @@ let forecast = (data) => {
     <hr>       
     `;
   }
-  console.log(displayContent);
+  // console.log(displayContent);
   return displayContent;
 };
 
