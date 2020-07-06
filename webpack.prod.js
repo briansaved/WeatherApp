@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin"); //default with webpack 4
+const CopyPlugin = require("copy-webpack-plugin"); //important for copying filse
 // const WorkboxPlugin = require("workbox-webpack-plugin"); //service worker
 
 module.exports = {
@@ -63,6 +64,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       //utputs the CSS files in separate folders
       filename: "[name]-[contentHash].css", //cache busring
+    }),
+    new CopyPlugin({
+      //will copy the icon files to build
+      patterns: [
+        { from: "src/client/media/icons", to: "src/client/media/icons" },
+      ],
     }),
     // new WorkboxPlugin.GenerateSW(), //Service worker
   ],
