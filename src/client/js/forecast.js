@@ -1,19 +1,42 @@
 let weekDay = [
-  "sunday",
-  "monday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
 ];
 
 let forecast = (data) => {
-  let displayContent;
-  for (i = 0; i < 16; i++) {
+  console.log("forecast funct is called :", data);
+  let displayContent = "";
+  for (let i = 0; i < data.weather.length - 1; i++) {
     let d = new Date();
     d.setDate(d.getDate() + i);
     let dayForecast = `${d.getMonth() + 1}.${d.getDate()}.${d.getFullYear()} ${
       weekDay[d.getDay()]
     }`;
+    const weather = data.weather[i].weather.description;
+    const icon = data.weather[i].weather.icon;
+    const max = data.weather[i].max_temp;
+    const min = data.weather[i].min_temp;
+
+    displayContent = `${displayContent}  
+    <h5>${dayForecast}</h5>      
+    <div class="weather">
+        <h6>${weather}</h6>
+        <img src="src/client/media/icons/${icon}.png" widht="50px" height="50px">
+        <div class="multi-line">
+            <p>Max Temp: ${max} &#8451;</p>
+            <p>Min Temp: ${min} &#8451;</p>
+        </div>
+    </div> 
+    <hr>       
+    `;
   }
+  console.log(displayContent);
+  return displayContent;
 };
+
+export { forecast };

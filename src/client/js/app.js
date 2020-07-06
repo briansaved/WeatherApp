@@ -110,6 +110,7 @@ let updateUi = async () => {
           ? "Degrees Celcius in 16 Days Time" //Conditional Message Rendering if more than 16
           : "Degrees Celcius on Arrival" //If less than 16 days ahead
       }`;
+    document.getElementById("rest").innerHTML = Client.forecast(allData);
     listener(); //reinstate listener once data is displayed
   } catch (error) {
     console.log(`UI Failure Render Error APP.JS: ${error}`);
