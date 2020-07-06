@@ -104,7 +104,11 @@ let updateUi = async () => {
       allData.weather[`${daysValue > 15 ? 15 : daysValue}`].temp +
       ` ${
         daysValue > 15
-          ? "Degrees Celcius in 16 Days Time" //Conditional Message Rendering if more than 16
+          ? "Degrees Celcius in" +
+            " " +
+            allData.weather.length + //If array length changes Code will still work
+            " " +
+            " Days Time" //Conditional Message Rendering if more than 16
           : "Degrees Celcius on Arrival" //If less than 16 days ahead
       }`;
     document.getElementById("rest").innerHTML = Client.forecast(allData);
