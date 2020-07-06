@@ -9,7 +9,7 @@ let getWeather = async (lat, lon) => {
 
   try {
     const forcast = await response.json();
-    console.log(forcast);
+    // console.log(forcast);
     return forcast; //a default of a 16 day forcast
   } catch (err) {
     console.log(`getWeather() Function Error : ${err}`);

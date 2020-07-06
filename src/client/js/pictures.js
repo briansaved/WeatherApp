@@ -22,7 +22,7 @@ let getImage = async (city, country) => {
         ? (returnPic = picDatas.hits[0].webformatURL) //Use Country Image instead
         : (returnPic = picData.hits[0].webformatURL);
   } catch (err) {
-    console.log("City Image Or Country Image Error :", err);
+    console.log("City And Country Image Error :", err);
     let defaults = await defaultPic.json(); //In case of an error
     returnPic = defaults.hits[0].webformatURL; //Pull Pyramids default Picture
   } finally {

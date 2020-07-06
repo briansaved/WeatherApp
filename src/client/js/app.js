@@ -9,10 +9,7 @@ const retrieveData = async (url = "") => {
     //Validate that the City Entered is Valid
     cityData.geonames.length == 0 //Validate City Name
       ? (alert("Please Enter a valid Location"), listener())
-      : console.log(`${cityData.geonames[0].countryName}
-      ${cityData.geonames[0].lat}
-      ${cityData.geonames[0].lng}
-      ${cityData.geonames[0].name}`);
+      : console.log(`Entered Location Valid!`);
     return cityData;
   } catch (error) {
     console.log("Retrieve Data Error App.js: ", error);
